@@ -1,0 +1,73 @@
+<div *ngIf="err.message">
+    <div class="alert alert-danger">
+        {{err}}
+    </div>
+</div>
+
+<form *ngIf="isDataLoaded" class="form-horizontal">
+    <fieldset>
+        <legend>Edit Apartment Details</legend>
+        <div class="form-group">
+            <label for="title" class="col-lg-2 control-label">Title</label>
+            <div class="col-lg-10">
+                <input class="form-control" id="title" placeholder="Title" type="text" name="title" [(ngModel)]="apartment.title">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Textarea</label>
+            <div class="col-lg-10">
+                <textarea class="form-control" rows="3" id="textArea"></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="street" class="col-lg-2 control-label">Street</label>
+            <div class="col-lg-10">
+                <input class="form-control" id="street" placeholder="Street" type="text" name="street" [(ngModel)]="apartment.street">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="town" class="col-lg-2 control-label">town</label>
+            <div class="col-lg-10">
+                <input class="form-control" id="town" placeholder="town" type="text" name="town" [(ngModel)]="apartment.town">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="city" class="col-lg-2 control-label">city</label>
+            <div class="col-lg-10">
+                <input class="form-control" id="city" placeholder="city" type="text" name="city" [(ngModel)]="apartment.city">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="moveInDate" class="col-lg-2 control-label">moveInDate</label>
+            <div class="col-lg-10">
+                <input class="form-control" id="moveInDate" placeholder="moveInDate" type="text" name="moveInDate" [(ngModel)]="apartment.moveInDate">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+            <div class="col-lg-10">
+                <input class="form-control" id="inputEmail" placeholder="Email" name="email" [(ngModel)]="apartment.email" type="text">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="country" class="col-lg-2 control-label">country</label>
+            <div class="col-lg-10">
+                <input class="form-control" id="country" placeholder="country" type="text" name="country" [(ngModel)]="apartment.country">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" (click)="cancelNewApartment()" class="btn btn-default">Cancel</button>
+                <button type="submit" (click)="saveApartment(apartment)" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
