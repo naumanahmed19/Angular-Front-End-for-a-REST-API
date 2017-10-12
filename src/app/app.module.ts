@@ -1,4 +1,5 @@
-import { ApartmentsService } from './apartments.service';
+import { ValidationService } from './_services/validation.service';
+import { ApartmentsService } from './_services/apartments.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -6,38 +7,38 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { DateTimePickerModule } from 'ng-pick-datetime';
+
 
 import { AppComponent } from './app.component';
-import { ApartmentsComponent } from './apartments/apartments.component';
-import { ApartmentsCreateComponent } from './apartments-create/apartments-create.component';
-import { ApartmentsShowComponent } from './apartments-show/apartments-show.component';
-import { ApartmentsEditComponent } from './apartments-edit/apartments-edit.component';
+import { ApartmentsListComponent } from './_components/apartments/apartments-list/apartments-list.component';
+import { ApartmentsAddEditComponent } from './_components/apartments/apartments-add-edit/apartments-add-edit.component';
+import { ApartmentsShowComponent } from './_components/apartments/apartments-show/apartments-show.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 
-
-
 const appRoutes: Routes = [
-  { path: 'apartments', component: ApartmentsComponent },
-  { path: 'apartments/create', component: ApartmentsCreateComponent},
+  { path: 'apartments', component: ApartmentsListComponent },
+  { path: 'apartments/create', component: ApartmentsAddEditComponent},
   { path: 'apartments/show/:id', component: ApartmentsShowComponent},
-  { path: 'apartments/:id/edit/:token', component: ApartmentsEditComponent},
+  { path: 'apartments/:id/edit/:token', component: ApartmentsAddEditComponent},
   { path: '404', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    ApartmentsComponent,
+    ApartmentsListComponent,
     ApartmentsShowComponent,
-    ApartmentsEditComponent,
+    ApartmentsAddEditComponent,
     NotFoundComponent,
-    ApartmentsCreateComponent,
+
   ],
   imports: [
-  
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -45,10 +46,13 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes
     ),
-   
+    BrowserAnimationsModule,
+    DateTimePickerModule
   ],
   providers: [
-    ApartmentsService
+    ApartmentsService,
+    ValidationService,
+
   ],
   bootstrap: [AppComponent]
 })

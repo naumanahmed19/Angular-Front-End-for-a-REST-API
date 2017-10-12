@@ -1,13 +1,19 @@
-import { ApartmentsService } from './../apartments.service';
 import { Component, OnInit } from '@angular/core';
-import { Apartment } from './../apartment';
+
+import { ApartmentsService } from './../../../_services/apartments.service';
+import { Apartment } from './../../../_interfaces/apartment';
+import { fadeInAnimation } from './../../../_animations/index';
+
+
 
 @Component({
   selector: 'app-apartments',
-  templateUrl: './apartments.component.html',
-  styleUrls: ['./apartments.component.css']
+  templateUrl: './apartments-list.component.html',
+  styleUrls: ['./apartments-list.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
-export class ApartmentsComponent implements OnInit {
+export class ApartmentsListComponent implements OnInit {
 
 
   apartments:Apartment[];
@@ -34,31 +40,9 @@ export class ApartmentsComponent implements OnInit {
     });
     
   }
-
-
-  // showEditApartmentForm(apartment){
-  //   if(!apartment){
-  //     this.apartmentForm = false;
-  //     return;
-  //   }
-  //   this.apartmentForm = true;
-  //   this.isNewForm = false;
-  //   this.newApartment = apartment;
-  // }
-
-
-  // showAddApartmentForm(){
-  //   this.newApartment = {};
-  //   this.apartmentForm = true;
-  //   this.isNewForm = true;
-    
-  // }
-
-
-
+  
   // removeApartment(apartment){
   //   this.apartmentService.destroy(apartment);
   // }
-
 
 }

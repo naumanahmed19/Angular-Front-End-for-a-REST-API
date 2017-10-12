@@ -1,7 +1,7 @@
 import { Http,Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Rx"
-import { Apartment } from './apartment';
+import { Apartment } from './../_interfaces/apartment';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -61,5 +61,7 @@ export class ApartmentsService {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
+
+
 
 }

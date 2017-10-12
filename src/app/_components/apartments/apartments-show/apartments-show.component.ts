@@ -1,11 +1,17 @@
-import { ApartmentsService } from './../apartments.service';
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+import { ApartmentsService } from './../../../_services/apartments.service';
+import { Apartment } from './../../../_interfaces/apartment';
+import { fadeInAnimation } from './../../../_animations/index';
 
 @Component({
   selector:  'app-apartments-show',
   templateUrl: './apartments-show.component.html',
-  styleUrls: ['./apartments-show.component.css']
+  styleUrls: ['./apartments-show.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class ApartmentsShowComponent implements OnInit {
 

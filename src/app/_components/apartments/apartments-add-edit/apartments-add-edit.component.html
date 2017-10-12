@@ -1,0 +1,90 @@
+<div class="row" *ngIf="!successResponse; else forminfo">
+    <div class="col-md-7">
+        <form [formGroup]="rForm" (ngSubmit)="saveApartment(rForm.value)" class="form-horizontal">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" type="text" formControlName="title" [ngClass]="vs.validationClass(rForm,'title')">
+                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'title')">
+                        {{ vs.validationMessage(rForm,'title')}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label for="textArea">Content</label>
+                    <textarea class="form-control" rows="3" id="textArea" formControlName="content" [ngClass]="vs.validationClass(rForm,'content')"></textarea>
+                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'content')">
+                        {{ vs.validationMessage(rForm,'content','You must specify a description thats between 3 and 500 characters.')}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="street">Street</label>
+                    <input type="text" class="form-control" id="street" type="text" formControlName="street" [ngClass]="vs.validationClass(rForm,'street')">
+                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'street')">
+                        {{ vs.validationMessage(rForm,'street')}}
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="town">Town</label>
+                    <input type="text" class="form-control" id="town" type="text" formControlName="town" [ngClass]="vs.validationClass(rForm,'town')">
+                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'town')">
+                        {{ vs.validationMessage(rForm,'town')}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" type="text" formControlName="city" [ngClass]="vs.validationClass(rForm,'city')">
+                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'city')">
+                        {{ vs.validationMessage(rForm,'city')}}
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" id="country" type="text" formControlName="country" [ngClass]="vs.validationClass(rForm,'country')">
+                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'country')">
+                        {{ vs.validationMessage(rForm,'country')}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" placeholder="your-email@example.com" type="text" formControlName="email" [ngClass]="vs.validationClass(rForm,'email')">
+                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'email')">
+                        {{ vs.validationMessage(rForm,'email')}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="postalCode">Postal Code</label>
+                    <input type="text" class="form-control" id="postalCode" type="text" formControlName="postalCode" [ngClass]="vs.validationClass(rForm,'postalCode')">
+                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'postalCode')">
+                        {{ vs.validationMessage(rForm,'postalCode')}}
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="title">Move In Date</label>
+                    <owl-date-time autoClose="true" placeHolder="enter date" showButtons="true" inputStyleClass="form-control" id="moveInDate" formControlName="moveInDate" [ngClass]="vs.validationClass(rForm,'moveInDate')" [locale]="en"></owl-date-time>
+                    <!-- <input type="text" class="form-control" id="moveInDate" type="text" formControlName="moveInDate" [ngClass]="vs.validationClass(rForm,'moveInDate')"> -->
+                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'moveInDate')">
+                        {{ vs.validationMessage(rForm,'moveInDate')}}
+                    </div>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Submit Form" [disabled]="!rForm.valid">
+        </form>
+    </div>
+</div>
+
+<ng-template #forminfo>
+    <div class="mt-5">
+        <h1>Great!</h1>
+        <p>Your apartment is posted and and edit link has been sent to your entered email {{rForm.value.email}}</p>
+    </div>
+</ng-template>
