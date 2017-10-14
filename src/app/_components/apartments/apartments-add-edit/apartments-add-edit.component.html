@@ -1,6 +1,12 @@
-<div class="row" *ngIf="!successResponse; else forminfo">
+<div class="row" *ngIf="!successResponse; else successMessage">
     <div class="col-md-7">
-        <form [formGroup]="rForm" (ngSubmit)="saveApartment(rForm.value)" class="form-horizontal">
+        <form [formGroup]="rForm" (ngSubmit)="saveApartment(rForm.value)" class="form-horizontal" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <input #fileInput type="file" multiple/>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <label for="title">Title</label>
@@ -70,21 +76,22 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="title">Move In Date</label>
-                    <owl-date-time autoClose="true" placeHolder="enter date" showButtons="true" inputStyleClass="form-control" id="moveInDate" formControlName="moveInDate" [ngClass]="vs.validationClass(rForm,'moveInDate')" [locale]="en"></owl-date-time>
+                    <owl-date-time autoClose="true" placeHolder="enter date" showButtons="true" inputStyleClass="form-control" id="moveInDate" formControlName="moveInDate" [ngClass]="vs.validationClass(rForm,'moveInDate')" [locale]="en" required></owl-date-time>
                     <!-- <input type="text" class="form-control" id="moveInDate" type="text" formControlName="moveInDate" [ngClass]="vs.validationClass(rForm,'moveInDate')"> -->
                     <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'moveInDate')">
                         {{ vs.validationMessage(rForm,'moveInDate')}}
                     </div>
                 </div>
             </div>
+
             <input type="submit" class="btn btn-primary" value="Submit Form" [disabled]="!rForm.valid">
         </form>
     </div>
 </div>
 
-<ng-template #forminfo>
+<ng-template #successMessage>
     <div class="mt-5">
         <h1>Great!</h1>
-        <p>Your apartment is posted and and edit link has been sent to your entered email {{rForm.value.email}}</p>
+        <p>Your apartment is saved.</p>
     </div>
 </ng-template>

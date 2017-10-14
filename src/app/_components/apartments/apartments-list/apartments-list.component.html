@@ -1,7 +1,8 @@
-<div class="container">
+<div class="container" *ngIf='isDataLoaded'>
     <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
+                <th>Image</th>
                 <th class="text-center">ID</th>
                 <th class="text-center">Title</th>
                 <th class="text-center">Street</th>
@@ -13,7 +14,10 @@
                 <th class="text-center">&nbsp;</th>
             </tr>
         </thead>
-        <tr *ngFor="let apartment of apartments">
+        {{apartments.current_page}}
+
+        <tr *ngFor="let apartment of apartments.data | paginate: { itemsPerPage: apartments.per_page, currentPage: apartments.current_page, totalItems: apartments.total }">
+            <td><img *ngIf='apartment.thumbnail' src="{{apartment.thumbnail}}" /></td>
             <td>{{apartment.id}}</td>
             <td> {{apartment.title}}</td>
             <td> {{apartment.street}}</td>
@@ -29,6 +33,6 @@
             </td>
         </tr>
     </table>
-    <button class="btn btn-success" (click)="showAddApartmentForm()"><i class="fa fa-plus"></i></button>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
     <br />
 </div>

@@ -27,8 +27,7 @@ export class ApartmentsListComponent implements OnInit {
 
   ngOnInit(){
     this.getApartments();
-    this.isDataLoaded = true;
-    console.log(this.isDataLoaded);
+
   }
 
 
@@ -36,6 +35,7 @@ export class ApartmentsListComponent implements OnInit {
     this.apartmentService.index().subscribe(
       apartments => {
         this.apartments = apartments,
+        this.isDataLoaded = true;
         error => this.errorMessage =<any>error
     });
     

@@ -30,9 +30,10 @@ export class ApartmentsShowComponent implements OnInit {
 
        this.apartmentService.show(this.id).subscribe(data => {
         this.apartment = data;
-        console.log(this.apartment);
+        this.isDataLoaded = true;
+ 
       });
-      this.isDataLoaded = true;
+  
   }
 
 }

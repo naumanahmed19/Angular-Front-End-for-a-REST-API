@@ -1,5 +1,5 @@
-
-import { Component, OnInit } from '@angular/core';
+import { FormDataService } from './../../../_services/form-data.service';
+import { Component, OnInit, ViewChild ,ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -18,8 +18,9 @@ import { fadeInAnimation } from './../../../_animations/index';
   host: { '[@fadeInAnimation]': '' }
 })
 
+
 export class ApartmentsAddEditComponent implements OnInit {
-  
+  @ViewChild("fileInput") fileInput ;
   rForm: FormGroup;
   apartment:any;   
   successResponse=false;
@@ -29,11 +30,13 @@ export class ApartmentsAddEditComponent implements OnInit {
   isDataLoaded: boolean = false;
   editRouteUrl: boolean = false;
 
+
   
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
     private vs: ValidationService,
+    private formDataService: FormDataService,
     private fb: FormBuilder,
     private apartmentService: ApartmentsService) { 
 
@@ -73,7 +76,7 @@ export class ApartmentsAddEditComponent implements OnInit {
       this.id = +params['id']; // (+) converts string 'id' to a number
       this.token = params['token']; 
     });
-
+   
     this.apartmentService.edit(this.id,this.token).subscribe(
       (data) => {
         this.rForm.patchValue(data);
@@ -95,15 +98,18 @@ export class ApartmentsAddEditComponent implements OnInit {
 
   saveApartment(apartment){
     var ex;
+
+    let formData  = this.formDataService.formData(apartment,this.fileInput);
+
     if(this.editRouteUrl){
-      ex = this.apartmentService.update(apartment);
+      ex = this.apartmentService.update(this.id,formData);
     }else{
-      ex = this.apartmentService.store(apartment);
+      ex = this.apartmentService.store(formData);
     }
     ex.subscribe(
      res => {
-      console.log('New Apartment Posted');
-      this.successResponse = true;
+        console.log('image request completed')
+        this.successResponse = true;
      },
      (err) => {
        // Error callback

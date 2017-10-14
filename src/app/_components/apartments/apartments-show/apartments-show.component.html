@@ -1,7 +1,10 @@
-<div *ngIf="isDataLoaded">
+<div *ngIf='isDataLoaded'>
     <h1>
         {{apartment.title}}
     </h1>
+
+    <img *ngIf='apartment.image' src="{{apartment.image}}" />
+
     <table class="table table-bordered table-striped table-hover">
         <tr>
             <td>ID</td>
@@ -33,4 +36,3 @@
             <td> {{apartment.email}}</td>
         </tr>
     </table>
-</div>

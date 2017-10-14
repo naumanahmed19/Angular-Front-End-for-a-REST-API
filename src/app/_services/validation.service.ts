@@ -41,7 +41,6 @@ export class ValidationService {
    * @return : string 
    */
   validationMessage(formGroup,field,validationError = 'This field is required.'){
-    console.log(formGroup.controls[field]);
     if(formGroup.controls[field].errors.remote)
       return formGroup.controls[field].errors.remote;
       else
