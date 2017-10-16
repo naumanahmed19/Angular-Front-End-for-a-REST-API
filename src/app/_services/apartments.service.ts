@@ -1,4 +1,4 @@
-import { Http,Response } from '@angular/http';
+import { Http,Response,Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Rx"
 import { Apartment } from './../_interfaces/apartment';
@@ -9,13 +9,15 @@ export class ApartmentsService {
 
   apartments;
 
+
   public url = 'http://2rent.app/api/apartments/';  // URL to web api
 
  
   constructor(private http:Http) {}
+  
 
-  index(): Observable<Apartment[]>{
-    return this.http.get(this.url)
+  index(page:number = 1): Observable<Apartment[]>{
+    return this.http.get(this.url+'?page='+page)
                .map((response:Response) => <Apartment[]>response.json());
          
   }
@@ -26,24 +28,23 @@ export class ApartmentsService {
   }
 
   edit(id,token){
-
     return this.http.get(this.url+id+'/edit/'+token).map(res => res.json());
   }
 
-  store(apartment){
-
-    return this.http.post(this.url,apartment);
-
+  store(formData){
+    this.debugFormData(formData);
+    return this.http.post(this.url,formData);
   }
   
-  update(id,apartment,fileToUpload: any =''){
-
-    return this.http.patch(this.url+id,apartment);
+  update(id,formData){
+    // Send Patch request to laravel
+    formData.append('_method', 'PATCH');
+    return this.http.post(this.url+id,formData);
   }
  
   
-  destroy(apartment){
-    return this.http.delete(this.url+apartment.id).subscribe(
+  destroy(id){
+    return this.http.delete(this.url+id).subscribe(
       res => {
         console.log('Apartment Deleted');
       },
@@ -53,10 +54,42 @@ export class ApartmentsService {
      );   
   }
 
+
+  /* Adding Options Example..
+     const headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  }
+  const options = {                                                                                                                                                                                 
+    headers: new Headers(headers), 
+    method: "PATCH",
+    body:apartment
+  };
+  */
+  
+
+  //Debuging Methods
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
+
+    console.log('xxxxx');
     return Promise.reject(error.message || error);
   }
 
+
+  debugFormData(formData){
+    var outputLog = {}, iterator = formData.entries(), end = false;
+    while(end == false) {
+       var item = iterator.next();
+       if(item.value!=undefined) {
+           outputLog[item.value[0]] = item.value[1];
+       } else if(item.done==true) {
+           end = true;
+       }
+        }
+    console.log(outputLog);
+  }
 
 }

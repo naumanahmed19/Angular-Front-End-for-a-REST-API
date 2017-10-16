@@ -1,38 +1,57 @@
 <div *ngIf='isDataLoaded'>
-    <h1>
-        {{apartment.title}}
-    </h1>
 
-    <img *ngIf='apartment.image' src="{{apartment.image}}" />
 
-    <table class="table table-bordered table-striped table-hover">
-        <tr>
-            <td>ID</td>
-            <td>{{apartment.id}}</td>
-        </tr>
+    <div class="grid">
+        <div class="col-10">
+            <mat-card>
+                <img mat-card-image src="{{!!apartment.image ? apartment.image : ''}}" alt="" />
+                <mat-card-content>
 
-        <tr>
-            <td>Street</td>
-            <td> {{apartment.street}}</td>
-        </tr>
-        <tr>
-            <td>Town</td>
-            <td> {{apartment.town}}</td>
-        </tr>
-        <tr>
-            <td>City</td>
-            <td> {{apartment.city}}</td>
-        </tr>
-        <tr>
-            <td>Country</td>
-            <td> {{apartment.country}}</td>
-        </tr>
-        <tr>
-            <td>Move In Date</td>
-            <td> {{apartment.moveInDate}}</td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td> {{apartment.email}}</td>
-        </tr>
-    </table>
+
+                    <div class="grid">
+                        <div class="col-8_sm-12">
+                            <h1>
+                                {{apartment.title}}
+                            </h1>
+                            {{apartment.content}}
+                        </div>
+                        <div class="col-4_sm-12">
+                            <mat-list>
+                                <mat-list-item>
+                                    <p mat-line><span class="list-title"> #ID:- </span>{{apartment.id}} </p>
+                                </mat-list-item>
+
+                                <mat-list-item>
+                                    <p mat-line> <span class="list-title">Street</span> {{apartment.street}} </p>
+                                </mat-list-item>
+
+                                <mat-list-item>
+                                    <p mat-line> <span class="list-title">Town</span>{{apartment.town}} </p>
+                                </mat-list-item>
+
+                                <mat-list-item>
+                                    <p> <span class="list-title">City</span> {{apartment.city}}</p>
+                                </mat-list-item>
+                                <mat-list-item>
+
+                                    <p> <span class="list-title">Country</span> {{apartment.country}}</p>
+                                </mat-list-item>
+
+
+                                <mat-list-item>
+                                    <p><span class="list-title">Move In Date</span> {{apartment.moveInDate}}</p>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <p><span class="list-title">Email</span> {{apartment.email}}</p>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+
+                    </div>
+
+                </mat-card-content>
+
+            </mat-card>
+        </div>
+
+    </div>

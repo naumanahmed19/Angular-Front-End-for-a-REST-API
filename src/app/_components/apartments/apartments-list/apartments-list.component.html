@@ -1,38 +1,28 @@
-<div class="container" *ngIf='isDataLoaded'>
-    <table class="table table-bordered table-striped table-hover">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th class="text-center">ID</th>
-                <th class="text-center">Title</th>
-                <th class="text-center">Street</th>
-                <th class="text-center">Town</th>
-                <th class="text-center">City</th>
-                <th class="text-center">Country</th>
-                <th class="text-center">Move In Date</th>
-                <th class="text-center">Email</th>
-                <th class="text-center">&nbsp;</th>
-            </tr>
-        </thead>
-        {{apartments.current_page}}
+<div class="grid">
+    <mat-spinner class="spinner" *ngIf='!isDataLoaded' [diameter]=50 [strokeWidth]=5></mat-spinner>
+</div>
 
-        <tr *ngFor="let apartment of apartments.data | paginate: { itemsPerPage: apartments.per_page, currentPage: apartments.current_page, totalItems: apartments.total }">
-            <td><img *ngIf='apartment.thumbnail' src="{{apartment.thumbnail}}" /></td>
-            <td>{{apartment.id}}</td>
-            <td> {{apartment.title}}</td>
-            <td> {{apartment.street}}</td>
-            <td> {{apartment.town}}</td>
-            <td> {{apartment.city}}</td>
-            <td> {{apartment.country}}</td>
-            <td> {{apartment.moveInDate}}</td>
-            <td> {{apartment.email}}</td>
-            <td>
-                <a routerLink='/apartments/show/{{apartment.id}}'>
-                    <i class="fa fa-eye"></i>
-                </a>
-            </td>
-        </tr>
-    </table>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-    <br />
+
+
+<div *ngIf='isDataLoaded'>
+    <div class="grid">
+        <div class="col-4" *ngFor="let apartment of apartments.data">
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{apartment.title}}</mat-card-title>
+                    <mat-card-subtitle>City: {{apartment.city}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="{{!!apartment.thumb ? apartment.thumb : 'assets/img/placeholder.png'}}" alt="" />
+
+                <mat-card-content>
+                    <a mat-button color="primary" routerLink='/apartments/show/{{apartment.id}}'>View Info</a>
+                </mat-card-content>
+
+            </mat-card>
+        </div>
+    </div>
+    <mat-paginator [length]="apartments.total" [pageIndex]="apartments.current_page" [pageSize]="apartments.per_page" (page)="nextPage($event)">
+    </mat-paginator>
+
 </div>

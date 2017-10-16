@@ -1,97 +1,90 @@
-<div class="row" *ngIf="!successResponse; else successMessage">
-    <div class="col-md-7">
-        <form [formGroup]="rForm" (ngSubmit)="saveApartment(rForm.value)" class="form-horizontal" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <input #fileInput type="file" multiple/>
-                </div>
-            </div>
+<div *ngIf='isDataLoaded'>
 
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" type="text" formControlName="title" [ngClass]="vs.validationClass(rForm,'title')">
-                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'title')">
-                        {{ vs.validationMessage(rForm,'title')}}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <label for="textArea">Content</label>
-                    <textarea class="form-control" rows="3" id="textArea" formControlName="content" [ngClass]="vs.validationClass(rForm,'content')"></textarea>
-                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'content')">
-                        {{ vs.validationMessage(rForm,'content','You must specify a description thats between 3 and 500 characters.')}}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="street">Street</label>
-                    <input type="text" class="form-control" id="street" type="text" formControlName="street" [ngClass]="vs.validationClass(rForm,'street')">
-                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'street')">
-                        {{ vs.validationMessage(rForm,'street')}}
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="town">Town</label>
-                    <input type="text" class="form-control" id="town" type="text" formControlName="town" [ngClass]="vs.validationClass(rForm,'town')">
-                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'town')">
-                        {{ vs.validationMessage(rForm,'town')}}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="city">City</label>
-                    <input type="text" class="form-control" id="city" type="text" formControlName="city" [ngClass]="vs.validationClass(rForm,'city')">
-                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'city')">
-                        {{ vs.validationMessage(rForm,'city')}}
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="country">Country</label>
-                    <input type="text" class="form-control" id="country" type="text" formControlName="country" [ngClass]="vs.validationClass(rForm,'country')">
-                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'country')">
-                        {{ vs.validationMessage(rForm,'country')}}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" placeholder="your-email@example.com" type="text" formControlName="email" [ngClass]="vs.validationClass(rForm,'email')">
-                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'email')">
-                        {{ vs.validationMessage(rForm,'email')}}
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="postalCode">Postal Code</label>
-                    <input type="text" class="form-control" id="postalCode" type="text" formControlName="postalCode" [ngClass]="vs.validationClass(rForm,'postalCode')">
-                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'postalCode')">
-                        {{ vs.validationMessage(rForm,'postalCode')}}
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="title">Move In Date</label>
-                    <owl-date-time autoClose="true" placeHolder="enter date" showButtons="true" inputStyleClass="form-control" id="moveInDate" formControlName="moveInDate" [ngClass]="vs.validationClass(rForm,'moveInDate')" [locale]="en" required></owl-date-time>
-                    <!-- <input type="text" class="form-control" id="moveInDate" type="text" formControlName="moveInDate" [ngClass]="vs.validationClass(rForm,'moveInDate')"> -->
-                    <div class="invalid-feedback" *ngIf="!vs.validField(rForm,'moveInDate')">
-                        {{ vs.validationMessage(rForm,'moveInDate')}}
-                    </div>
-                </div>
-            </div>
 
-            <input type="submit" class="btn btn-primary" value="Submit Form" [disabled]="!rForm.valid">
-        </form>
+    <div *ngIf="thumb">
+        <div class="grid">
+            <div class="col-4">
+                <mat-card>
+                    <img mat-card-image src="{{thumb}}" alt="" />
+                </mat-card>
+            </div>
+        </div>
     </div>
+
+    <div class="grid" *ngIf="!successResponse; else successMessage">
+        <div class="col-7 ">
+            <form [formGroup]="rForm" (ngSubmit)="saveApartment(rForm.value)" class="form-horizontal">
+
+                <div class="example-container">
+
+                    <div class="my-4">
+                        <input #fileInput type="file" />
+                    </div>
+                    <mat-form-field>
+                        <input matInput placeholder="Title" formControlName="title" required>
+                        <mat-error *ngIf="!vs.validField(rForm,'title')">{{ vs.validationMessage(rForm,'title')}}</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <textarea matInput placeholder="Description" formControlName="content"></textarea>
+                        <mat-error *ngIf="!vs.validField(rForm,'content')">{{ vs.validationMessage(rForm,'content','You must specify a description thats between 3 and 500 characters.')}}</mat-error>
+                    </mat-form-field>
+
+
+                    <div class="grid grid-spaceBetween">
+                        <mat-form-field class="col-6_sm-12">
+                            <input matInput placeholder="Street" formControlName="street" required>
+                            <mat-error *ngIf="!vs.validField(rForm,'street')">{{ vs.validationMessage(rForm,'street')}}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-6_sm-12">
+                            <input matInput placeholder="Town" formControlName="town" required>
+                            <mat-error *ngIf="!vs.validField(rForm,'town')">{{ vs.validationMessage(rForm,'town')}}</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="grid grid-spaceBetween">
+                        <mat-form-field class="col-6_sm-12">
+                            <input matInput placeholder="City" formControlName="city" required>
+                            <mat-error *ngIf="!vs.validField(rForm,'city')">{{ vs.validationMessage(rForm,'city')}}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-6_sm-12">
+                            <input matInput placeholder="Country" formControlName="country" required>
+                            <mat-error *ngIf="!vs.validField(rForm,'country')">{{ vs.validationMessage(rForm,'country')}}</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field>
+                        <input matInput placeholder="Email Address" formControlName="email" required>
+                        <mat-error *ngIf="!vs.validField(rForm,'email')">{{ vs.validationMessage(rForm,'email')}}</mat-error>
+                    </mat-form-field>
+
+                    <div class="grid grid-spaceBetween">
+                        <mat-form-field class="col-6_sm-12">
+                            <input matInput placeholder="Postal Code" formControlName="postalCode" required>
+                            <mat-error *ngIf="!vs.validField(rForm,'postalCode')">{{ vs.validationMessage(rForm,'postalCode')}}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="col-6_sm-12">
+                            <input matInput [matDatepicker]="picker" placeholder="Move In Date" formControlName="moveInDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="!vs.validField(rForm,'moveInDate')">{{ vs.validationMessage(rForm,'moveInDate')}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <button mat-raised-button type="submit" color="primary" [disabled]="!rForm.valid || this.loading">Save</button>
+                <mat-spinner class="spinner" *ngIf='this.loading' [diameter]=25 [strokeWidth]=3></mat-spinner>
+            </form>
+        </div>
+    </div>
+
+
+    <ng-template #successMessage>
+        <div class="mt-5">
+            <h1>Great!</h1>
+            <p>Your apartment is saved.</p>
+        </div>
+    </ng-template>
 </div>
-
-<ng-template #successMessage>
-    <div class="mt-5">
-        <h1>Great!</h1>
-        <p>Your apartment is saved.</p>
-    </div>
-</ng-template>
