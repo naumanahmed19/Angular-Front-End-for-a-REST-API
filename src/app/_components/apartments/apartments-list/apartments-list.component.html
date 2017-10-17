@@ -2,8 +2,6 @@
     <mat-spinner class="spinner" *ngIf='!isDataLoaded' [diameter]=50 [strokeWidth]=5></mat-spinner>
 </div>
 
-
-
 <div *ngIf='isDataLoaded'>
     <div class="grid">
         <div class="col-4" *ngFor="let apartment of apartments.data">

@@ -61,8 +61,5 @@ export class ApartmentsListComponent implements OnInit {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
   
-  // removeApartment(apartment){
-  //   this.apartmentService.destroy(apartment);
-  // }
 
 }

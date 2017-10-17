@@ -93,6 +93,3 @@ export const APP_DATE_FORMATS =
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-platformBrowserDynamic().bootstrapModule(AppModule);
-

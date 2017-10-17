@@ -45,10 +45,8 @@ export class ApartmentsService {
  
   
   destroy(id,token){
-    console.log('xxxxxddd');
     return this.http.delete(this.url+id+'/delete/'+token);
   }
-
 
   debugFormData(formData){
     var outputLog = {}, iterator = formData.entries(), end = false;
