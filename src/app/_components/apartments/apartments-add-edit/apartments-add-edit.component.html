@@ -72,6 +72,8 @@
                             <mat-datepicker #picker></mat-datepicker>
                             <mat-error *ngIf="!vs.validField(rForm,'moveInDate')">{{ vs.validationMessage(rForm,'moveInDate')}}</mat-error>
                         </mat-form-field>
+
+                        <input type="text" formControlName="token" hidden/>
                     </div>
                 </div>
                 <button mat-raised-button type="submit" color="primary" [disabled]="!rForm.valid || this.loading">Save</button>

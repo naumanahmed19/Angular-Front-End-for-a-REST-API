@@ -23,6 +23,7 @@ import { ApartmentsListComponent } from './_components/apartments/apartments-lis
 import { ApartmentsAddEditComponent } from './_components/apartments/apartments-add-edit/apartments-add-edit.component';
 import { ApartmentsShowComponent } from './_components/apartments/apartments-show/apartments-show.component';
 import { NotFoundComponent } from './_components/not-found/not-found.component';
+import { ApartmentDeleteComponent } from './_components/apartments/apartment-delete/apartment-delete.component';
 
 
 
@@ -32,26 +33,12 @@ const appRoutes: Routes = [
   { path: 'apartments/create', component: ApartmentsAddEditComponent},
   { path: 'apartments/show/:id', component: ApartmentsShowComponent},
   { path: 'apartments/:id/edit/:token', component: ApartmentsAddEditComponent},
+  { path: 'apartments/:id/delete/:token', component: ApartmentDeleteComponent},
   { path: '404', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
 
-// import { NativeDateAdapter } from "@angular/material";
-
-// export class AppDateAdapter extends NativeDateAdapter {
-  
-//       format(date: Date, displayFormat: Object): string {
-  
-          
-//               const day = date.getDate();
-//               const month = date.getMonth() + 1;
-//               const year = date.getFullYear();
-//               return `${year}-${month}-${day}`;
-          
-//       }
-//   }
-  
 export const APP_DATE_FORMATS =
 {
     parse: {
@@ -67,19 +54,15 @@ export const APP_DATE_FORMATS =
 
 
 
-  
-
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
     ApartmentsListComponent,
     ApartmentsShowComponent,
     ApartmentsAddEditComponent,
+    ApartmentDeleteComponent,
     NotFoundComponent,
+
 
   ],
   imports: [

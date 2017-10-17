@@ -54,6 +54,7 @@ export class ApartmentsAddEditComponent implements OnInit {
       'moveInDate':    [null,Validators.required],
       'postalCode':    [null,Validators.required],
       'email':         [null,Validators.required],
+      'token':         [null],
       'content':       [null,Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(500)])],
     });
 
@@ -88,6 +89,7 @@ export class ApartmentsAddEditComponent implements OnInit {
       (data) => {
         this.thumb = data.thumb;
         data.moveInDate  = new Date(data.moveInDate );
+        data.token  = this.token;
         this.rForm.patchValue(data);
         this.isDataLoaded = true;
       },
@@ -122,9 +124,8 @@ export class ApartmentsAddEditComponent implements OnInit {
        this.loading = false;
         console.log('image request completed')
         this.sharedServices.openSnackBar('Information Saved');
-       // this.successResponse = true;
-       
-      
+        this.successResponse = true;
+  
      },
      (err) => {
       this.loading = false;

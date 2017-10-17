@@ -1,3 +1,4 @@
+
 import { Http,Response,Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Rx"
@@ -43,39 +44,9 @@ export class ApartmentsService {
   }
  
   
-  destroy(id){
-    return this.http.delete(this.url+id).subscribe(
-      res => {
-        console.log('Apartment Deleted');
-      },
-      err=>{
-           console.log('something wrong');
-      }
-     );   
-  }
-
-
-  /* Adding Options Example..
-     const headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Access-Control-Allow-Headers': 'Content-Type',
-  }
-  const options = {                                                                                                                                                                                 
-    headers: new Headers(headers), 
-    method: "PATCH",
-    body:apartment
-  };
-  */
-  
-
-  //Debuging Methods
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-
-    console.log('xxxxx');
-    return Promise.reject(error.message || error);
+  destroy(id,token){
+    console.log('xxxxxddd');
+    return this.http.delete(this.url+id+'/delete/'+token);
   }
 
 
