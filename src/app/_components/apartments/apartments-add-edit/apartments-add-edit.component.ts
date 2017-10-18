@@ -77,7 +77,7 @@ export class ApartmentsAddEditComponent implements OnInit {
 
   /*
    *  If edit route get already saved data first and populate in form
-   *  if token not exisit or valid send to 404
+   *  if token not exisit or not valid send to 404
    */
   editRoute(){
     this.route.params.subscribe(params => {
@@ -122,9 +122,9 @@ export class ApartmentsAddEditComponent implements OnInit {
     ex.subscribe(
      res => {
        this.loading = false;
-        console.log('image request completed')
-        this.sharedServices.openSnackBar('Information Saved');
-        this.successResponse = true;
+       this.successResponse = true;
+       var response = res.json();
+       this.sharedServices.openSnackBar(response.message);
   
      },
      (err) => {
@@ -144,8 +144,6 @@ export class ApartmentsAddEditComponent implements OnInit {
      }
     );   
  }
-
-
 }
 
 

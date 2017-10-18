@@ -4,20 +4,20 @@ import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Rx"
 import { Apartment } from './../_interfaces/apartment';
 import 'rxjs/add/operator/map';
-
+import { environment } from '../../environments/environment';
 @Injectable()
 export class ApartmentsService {
 
   apartments;
 
 
-  public url = 'http://2rent.app/api/apartments/';  // URL to web api
+  public url = environment.apiUrl;  // URL to web api
 
  
   constructor(private http:Http) {}
   
 
-  index(page:number = 1): Observable<Apartment[]>{
+  index(page): Observable<Apartment[]>{
     return this.http.get(this.url+'?page='+page)
                .map((response:Response) => <Apartment[]>response.json());
          

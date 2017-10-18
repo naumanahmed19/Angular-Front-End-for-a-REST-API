@@ -20,7 +20,8 @@
             </mat-card>
         </div>
     </div>
-    <mat-paginator [length]="apartments.total" [pageIndex]="apartments.current_page" [pageSize]="apartments.per_page" (page)="nextPage($event)">
+
+    <mat-paginator *ngIf='!next_page_url || !last_page_url' [length]="apartments.total" [pageIndex]="apartments.current_page-1" [pageSize]="apartments.per_page" (page)="paginate($event)">
     </mat-paginator>
 
 </div>

@@ -41,7 +41,7 @@ export class ApartmentsListComponent implements OnInit {
   }
 
 
-  getApartments(page:number = 1){
+  getApartments(page:number=1){
     this.apartmentService.index(page).subscribe(
       apartments => {
         this.apartments = apartments,
@@ -51,14 +51,9 @@ export class ApartmentsListComponent implements OnInit {
   }
 
 
-  nextPage(e){
-    this.isDataLoaded = false;
-   this.getApartments(e.pageIndex)
-  }
-  
-
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  paginate(e){
+   this.isDataLoaded = false;
+   this.getApartments(e.pageIndex+1)
   }
   
 
